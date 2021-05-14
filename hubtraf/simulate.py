@@ -32,10 +32,10 @@ async def simulate_user(hub_url, username, password, delay_seconds, code_execute
 async def run(args):
     # FIXME: Pass in individual arguments, not argparse object
     awaits = []
-    for i in range(args.user_count):
+    for i in range(1, args.user_count + 1):
         awaits.append(simulate_user(
             args.hub_url,
-            f'{args.user_prefix}{i:02}',
+            f'{args.user_prefix}{i:03}',
             f'{args.user_password}',
             int(random.uniform(0, args.user_session_max_start_delay)),
             int(random.uniform(args.user_session_min_runtime, args.user_session_max_runtime))
