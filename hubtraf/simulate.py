@@ -35,8 +35,8 @@ async def run(args):
     for i in range(args.user_count):
         awaits.append(simulate_user(
             args.hub_url,
-            f'{args.user_prefix}-' + str(i),
-            'hello',
+            f'{args.user_prefix}{i:02}',
+            f'{args.user_password}',
             int(random.uniform(0, args.user_session_max_start_delay)),
             int(random.uniform(args.user_session_min_runtime, args.user_session_max_runtime))
         ))
@@ -57,6 +57,11 @@ def main():
     )
     argparser.add_argument(
         '--user-prefix',
+        default=socket.gethostname(),
+        help='Prefix to use when generating user names'
+    )
+    argparser.add_argument(
+        '--user-password',
         default=socket.gethostname(),
         help='Prefix to use when generating user names'
     )
